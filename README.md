@@ -1,5 +1,4 @@
 
-Overview
 Welcome to the Pokédex Web Application! This is an interactive web application designed to showcase Pokémon from the first generation. The application allows users to explore various Pokémon, view their images, and identify them by name and number.
 
 Live Demo: https://minx-monika.github.io/pokedex/
