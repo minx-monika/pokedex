@@ -4,11 +4,9 @@ const searchInput = document.querySelector("#search-input");
 const numberFilter = document.querySelector("#number");
 const nameFilter = document.querySelector("#name");
 const notFoundMessage = document.querySelector("#not-found-message");
-const closeButton = document.querySelector(".search-close-icon");
 
 let allPokemons = [];
 
-// Fetch Pokemon list
 fetch(`https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`)
   .then((response) => response.json())
   .then((data) => {
@@ -16,7 +14,6 @@ fetch(`https://pokeapi.co/api/v2/pokemon?limit=${MAX_POKEMON}`)
     displayPokemons(allPokemons);
   });
 
-// Fetch individual Pokemon data before redirecting
 async function fetchPokemonDataBeforeRedirect(id) {
   try {
     const [pokemon, pokemonSpecies] = await Promise.all([
@@ -33,7 +30,6 @@ async function fetchPokemonDataBeforeRedirect(id) {
   }
 }
 
-// Display Pokemons
 function displayPokemons(pokemon) {
   listWrapper.innerHTML = "";
 
@@ -49,7 +45,7 @@ function displayPokemons(pokemon) {
             <img src="https://raw.githubusercontent.com/pokeapi/sprites/master/sprites/pokemon/other/dream-world/${pokemonID}.svg" alt="${pokemon.name}" />
         </div>
         <div class="name-wrap">
-            <p class="body3-fonts">${pokemon.name}</p>
+            <p class="body3-fonts">#${pokemon.name}</p>
         </div>
     `;
 
@@ -64,7 +60,8 @@ function displayPokemons(pokemon) {
   });
 }
 
-// Handle search functionality
+searchInput.addEventListener("keyup", handleSearch);
+
 function handleSearch() {
   const searchTerm = searchInput.value.toLowerCase();
   let filteredPokemons;
@@ -91,29 +88,11 @@ function handleSearch() {
   }
 }
 
-// Clear search input and reset display
+const closeButton = document.querySelector(".search-close-icon");
+closeButton.addEventListener("click", clearSearch);
+
 function clearSearch() {
   searchInput.value = "";
   displayPokemons(allPokemons);
   notFoundMessage.style.display = "none";
 }
-
-// Add event listeners
-searchInput.addEventListener("keyup", handleSearch);
-closeButton.addEventListener("click", clearSearch);
-
-// Toggle collapsible menu
-const menuToggle = document.querySelector(".menu-toggle");
-const leftMenu = document.querySelector(".left-menu");
-
-menuToggle.addEventListener("click", () => {
-  leftMenu.classList.toggle("active");
-});
-
-// Handle sort functionality
-const sortFilters = document.querySelectorAll("input[name='filters']");
-sortFilters.forEach((filter) =>
-  filter.addEventListener("change", () => {
-    handleSearch(); // Reapply filtering whenever sorting changes
-  })
-);
