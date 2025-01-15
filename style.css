@@ -129,6 +129,18 @@ body {
   gap: 16px;
 }
 
+footer {
+  background-color: #DC0A2D; /* Dark like the mysteries of my heart */
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
 .search-wrap {
   position: relative;
   background-color: var(--grayscale-white);
